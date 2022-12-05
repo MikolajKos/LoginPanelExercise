@@ -1,0 +1,38 @@
+﻿<Window x:Class="LoginPanelLesson.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoginPanelLesson"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
+    <Grid Height="450" Width="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="10" VerticalAlignment="Center">
+            <TextBlock Text="LOGIN REGISTER" 
+                       HorizontalAlignment="Center"
+                       FontSize="30"
+                       FontWeight="ExtraLight" Foreground="#FF0F7DD8"
+                       />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Text="Login:"
+                       Style="{StaticResource BasicTextBlock}"/>
+            <TextBox Text="{Binding LoginInput}" Style="{StaticResource BasicTextBox}"/>
+
+            <TextBlock Text="Login:"
+                       Style="{StaticResource BasicTextBlock}"/>
+            <PasswordBox Style="{StaticResource BasicPasswordBox}"/>
+
+            <Button Content="Login" Style="{StaticResource BasicButton}"/>
+            <Button Content="Register" Style="{StaticResource BasicButton}"/>
+
+            <TextBlock/>
+        </StackPanel>
+    </Grid>
+</Window>
