@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoginPanelLesson.MVVM.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace LoginPanelLesson.MVVM.Models
 {
     public class MainModel
     {
-        
+        public MyDbContext myContext;
     }
 }

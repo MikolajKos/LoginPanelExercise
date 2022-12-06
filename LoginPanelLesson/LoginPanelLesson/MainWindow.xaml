@@ -3,10 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ph="clr-namespace:LoginPanelLesson.MVVM.Views.ViewUtils"
+        xmlns:vm="clr-namespace:LoginPanelLesson.MVVM.ViewModels"
         xmlns:local="clr-namespace:LoginPanelLesson"
         mc:Ignorable="d"
         Title="MainWindow" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
-    <Grid Height="450" Width="400">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid Height="460" Width="450">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition/>
@@ -25,14 +32,40 @@
                        Style="{StaticResource BasicTextBlock}"/>
             <TextBox Text="{Binding LoginInput}" Style="{StaticResource BasicTextBox}"/>
 
-            <TextBlock Text="Login:"
+            <TextBlock Text="Password:"
                        Style="{StaticResource BasicTextBlock}"/>
-            <PasswordBox Style="{StaticResource BasicPasswordBox}"/>
 
-            <Button Content="Login" Style="{StaticResource BasicButton}"/>
-            <Button Content="Register" Style="{StaticResource BasicButton}"/>
+            
 
-            <TextBlock/>
+            <WrapPanel>
+                <Grid Width="370">
+                    <PasswordBox ph:PasswordHelper.Attach="True" Visibility="{Binding DottedPasswordVisibility}"
+                             ph:PasswordHelper.Password="{Binding PasswordInput, Mode=TwoWay}"
+                             Style="{StaticResource BasicPasswordBox}"
+                             BorderThickness="1 1 0 1"/>
+                    <TextBox Text="{Binding PasswordInput, Mode=TwoWay}"
+                             Style="{StaticResource BasicTextBox}"
+                             Visibility="{Binding UnDottedPasswordVisibility}"
+                             BorderThickness="1 1 0 1"/>
+                </Grid>
+
+                <Button Command="{Binding ChangeVisibilityCommand}"
+                        Content="👁"
+                        Height="40"
+                        Margin="0 0 0 20"
+                        Width="40" Foreground="#FF767676"/>
+            </WrapPanel>
+            
+
+            <Button Command="{Binding LoginCommand}"
+                    Content="Login" 
+                    Style="{StaticResource BasicButton}"/>
+            
+            <Button Command="{Binding RegisterCommand}"
+                    Content="Register"
+                    Style="{StaticResource BasicButton}"/>
+
+            <TextBlock Text="{Binding OutputMessage}" TextWrapping="Wrap"/>
         </StackPanel>
     </Grid>
 </Window>

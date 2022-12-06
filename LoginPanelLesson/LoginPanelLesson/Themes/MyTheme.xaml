@@ -6,8 +6,9 @@
         <Setter Property="Height" Value="40"/>
         <Setter Property="Padding" Value="10 0 10 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="ExtraLight"/>
+        <Setter Property="Foreground" Value="#FF2E2D2D"/>
     </Style>
 
     <Style TargetType="{x:Type PasswordBox}" x:Key="BasicPasswordBox">
@@ -15,20 +16,24 @@
         <Setter Property="Height" Value="40"/>
         <Setter Property="Padding" Value="10 0 10 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="ExtraLight"/>
+        <Setter Property="Foreground" Value="#FF2E2D2D"/>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="BasicTextBlock">
         <Setter Property="Margin" Value="0 0 0 10"/>
         <Setter Property="FontSize" Value="22"/>
         <Setter Property="FontWeight" Value="ExtraLight"/>
+        <Setter Property="Foreground" Value="#FF2E2D2D"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="BasicButton">
         <Setter Property="Height" Value="50"/>
         <Setter Property="Margin" Value="0 0 0 10"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="#FF2E2D2D"/>
+        <Setter Property="BorderBrush" Value="#FF2E2D2D"/>
     </Style>
 
 </ResourceDictionary>
