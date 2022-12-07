@@ -13,7 +13,9 @@ namespace LoginPanelLesson.MVVM.Models.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source = C:\Users\nikok\OneDrive\Dokumenty\PROGRAMOWANIE\.NET\WFP\MVVM\LoginPanelExercise\LoginPanelLesson\LoginPanelLesson\LoginPanelDB.db");
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlite(@"FileName = LoginPanelDB.db");
         }
+
     }
 }

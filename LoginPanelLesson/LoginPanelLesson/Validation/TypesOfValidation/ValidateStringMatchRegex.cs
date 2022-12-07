@@ -9,14 +9,18 @@ namespace LoginPanelLesson.Validation.TypesOfValidation
 {
     public class ValidateStringMatchRegex : ISpecyficValidation<string>
     {
+        private string rgx;
+        private string errorMessage;
+
+        public ValidateStringMatchRegex(string rgx, string errorMessage) => (this.rgx, this.errorMessage) = (rgx, errorMessage); 
+
         public bool Validate(string value, out string message)
         {
-            string rgx = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{0,}$";
             message = "";
 
             if (Regex.IsMatch(value, rgx)) return true;
 
-            message = "must have minimum one uppercase letter, one lowercase letter, number and special character.";
+            message = errorMessage;
             return false;
         }
     }

@@ -107,7 +107,8 @@ namespace LoginPanelLesson.MVVM.ViewModels
                         validate.AddValidator(new Validator<string>(PasswordInput, "Password",
                             new List<ISpecyficValidation<string>>()
                             {
-                                new ValidateStringEmpty()
+                                new ValidateStringEmpty(),
+                                new ValidateAccountExist(LoginInput, PasswordInput)
                             }));
 
                         if (!validate.Validation(out string message))
@@ -119,8 +120,7 @@ namespace LoginPanelLesson.MVVM.ViewModels
 
                         LinqQueries myQueries = new LinqQueries();
 
-                        myQueries.Login(LoginInput, PasswordInput, out string loginMessage);
-                        OutputMessage = loginMessage;
+                        OutputMessage = myQueries.Login(LoginInput);
                     },
                     (object o) => true);
                 return _loginCommand;
@@ -147,7 +147,10 @@ namespace LoginPanelLesson.MVVM.ViewModels
                             new List<ISpecyficValidation<string>>()
                             {
                                 new ValidateStringEmpty(),
-                                new ValidateStringMatchRegex(),
+                                new ValidateStringMatchRegex("(?=.*[A-Z])", "must contain at least one uppercase letter."),
+                                new ValidateStringMatchRegex("(?=.*[a-z])", "must contain at least one lowercase letter."),
+                                new ValidateStringMatchRegex("(?=.*[0-9])", "must contain at least one number."),
+                                new ValidateStringMatchRegex("(?=.*[!@#\\$%\\^&*\\(\\)\\-_\\+\\=\\{\\}\\[\\];':<>\\/\\?|])", "must contain at least one special character."),
                                 new ValidateStringRange(10, 50)
                             }));
 
@@ -158,11 +161,11 @@ namespace LoginPanelLesson.MVVM.ViewModels
                         }
 
                         LinqQueries myQueries = new LinqQueries();
-                        myQueries.Register(LoginInput, PasswordInput, out string registerMessage);
+                        myQueries.Register(LoginInput, PasswordInput);
 
                         LoginInput = string.Empty;
                         PasswordInput = string.Empty;
-                        OutputMessage = registerMessage;
+                        OutputMessage = $"Registered successfully, welcome {LoginInput}!"; ;
                     },
                     (object o) => true);
                 return _registerCommand;

@@ -22,11 +22,14 @@ namespace LoginPanelLesson.Repositories
             return loginExist;
         }
 
-        private bool EnteredAndDbPasswordsAreSame(string password, string login)
+        public bool EnteredAndDbPasswordsAreSame(string login, string password)
         {
+            model.myContext = new();
+
+            string HashedPW = pwHashing.HashPassword(password);
             var getPassword = model.myContext.User.FirstOrDefault(k => k.UserLogin == login)?.UserPassword;
 
-            if (getPassword == password) return true;
+            if (getPassword == HashedPW) return true;
 
             return false;
         }
@@ -38,10 +41,8 @@ namespace LoginPanelLesson.Repositories
             return storedLogin.ToString();
         }
 
-        public void Register(string login, string password, out string message)
+        public void Register(string login, string password)
         {
-            message =  "";
-
             model.myContext = new();
             string HashedPW = pwHashing.HashPassword(password);
 
@@ -53,22 +54,13 @@ namespace LoginPanelLesson.Repositories
             });
 
             model.myContext.SaveChanges();
-            message = $"Registered successfully, welcome {login}!";
         }
 
-        public void Login(string login, string password, out string message)
+        public string Login(string login)
         {
-            message = "";
             model.myContext = new();
-            string HashedPW = pwHashing.HashPassword(password);
-
-            if (!EnteredAndDbPasswordsAreSame(HashedPW, login))
-            {
-                message = "Incorrect password or login";
-                return;
-            }
-
-            message = $"Welcome {GetLogin(login)}!";
+            var storedLogin = model.myContext.User.FirstOrDefault(k => k.UserLogin == login).UserLogin;
+            return $"Welcome {storedLogin}!";
         }
     }
 }
