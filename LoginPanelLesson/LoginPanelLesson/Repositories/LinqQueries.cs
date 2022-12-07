@@ -34,13 +34,6 @@ namespace LoginPanelLesson.Repositories
             return false;
         }
 
-        private string GetLogin(string login)
-        {
-            model.myContext = new();
-            var storedLogin = model.myContext.User.FirstOrDefault(k => k.UserLogin == login).UserLogin;
-            return storedLogin.ToString();
-        }
-
         public void Register(string login, string password)
         {
             model.myContext = new();
